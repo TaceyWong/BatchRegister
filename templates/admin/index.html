@@ -1,0 +1,105 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+<style>
+    .label-primary , .btn-primary , .panel-primary> .panel-heading{
+        color:#ffffff;
+        background-color: #121212;
+        border-color:#121212;
+    }
+</style>
+
+<div class="page-header">
+    <h3>数据统计</h3>
+</div>
+<div class="row">
+    <div class="panel panel-primary col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">全局数据集</h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">0</span>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">类型一数据集</h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">0</span>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">类型二数据集</h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">0</span>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">类型三数据集</h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">0</span>
+        </div>
+    </div>
+</div>
+<div class="page-header">
+    <h3></h3>
+</div>
+<div class="row">
+    <div class="panel panel-primary col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">Total of Today-Login-User </h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">{{record_total or 0}}</span>
+        </div>
+    </div>
+<div class="panel panel-default col-sm-9">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Action Record</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead> <tr> <th>#</th> <th>Action Time</th> <th>Action</th> <th>Operator</th> </tr> </thead>
+      {% for record in  records%}
+      <tr>
+          <th scope="row">{{record.index}}</th>
+          <td>{{record.time}}</td> <td>{{record.action}}</td> <td>{{record.user}}</td> </tr>
+      {% endfor %}
+  </table>
+</div>
+</div>
+
+<div class="page-header">
+    <h3></h3>
+</div>
+
+<div class="row">
+    <div class="panel panel-primary col-sm-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">Total Login Count of All Administrators </h3>
+        </div>
+        <div class="panel-body">
+            <span class="label label-primary">{{admin_count_total or 0}}</span>
+        </div>
+    </div>
+<div class="panel panel-default col-sm-9">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Administrators History Login Count &nbsp;&nbsp;<button class="glyphicon glyphicon-save btn btn-sm btn-primary" onclick="window.location.href='export_login_count';"> 导出</button></div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead> <tr> <th>#</th> <th>Administrator-Email</th> <th>Login Count</th> <th>Last Login Time</th> </tr> </thead>
+      {% for admin_count in  admin_counts%}
+      <tr>
+          <th scope="row">{{admin_count.index}}</th>
+          <td>{{admin_count.email}}</td> <td>{{admin_count.count}}</td> <td>{{admin_count.time}}</td> </tr>
+      {% endfor %}
+  </table>
+</div>
+</div>
+{% endblock %}
